@@ -1,0 +1,107 @@
+MyBoxLayout:
+    orientation: 'vertical'
+    padding: '10sp'
+    spacing: '10sp'
+    canvas:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    MyGrid:
+        id: mygrid
+        #spacing: '2sp'
+        canvas.before:
+            Color:
+                rgba: (1, 1, 1, 1)
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+    BoxLayout:
+        orientaion: 'horizontal'
+        spacing: '10sp'
+        size_hint: (1, None)
+        height: '40sp'
+
+        ToggleButton:
+            id: toggle
+            text: "NUMBER LOCK"
+            on_state: app.numlock = True if self.state == 'down' else False
+        Button:
+            text: "RESET ALL"
+            on_press: 
+                mygrid.resetAll(mygrid)
+                app.numlock = False
+                toggle.state = 'normal'
+        Button:
+            text: "RESET COLOR"
+            on_press: mygrid.resetColor(mygrid)
+        Button:
+            text: "RESET LINES"
+            on_press: mygrid.resetLines(mygrid)
+
+
+<MyLabel@Label>:
+    font_size: '20sp'
+    color: (0, 0, 0, 1)
+
+
+<DotButton>:
+    size_hint: (None, None)
+    height: app.size #self.parent.height / 40
+    width: app.size #self.parent.height / 40
+    background_color: (0, 0, 0, 0)
+    canvas:
+        Color:
+            rgba: (0, 0, 0, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<HLineButton>:
+    size_hint: (1, None)
+    height: app.size #self.parent.height / 40
+    background_color: (0, 0, 0, 0)
+    on_press: root.changeColor(self)
+    Image:
+        source: self.parent.src
+        pos: self.parent.pos
+        size: self.parent.size
+        allow_stretch: True
+        keep_ratio: False
+
+
+<VLineButton@Button>:
+    size_hint: (None, 1)
+    width: app.size #self.parent.height / 40
+    background_color: (0, 0, 0, 0)
+    on_press: root.changeColor(self)
+    Image:
+        source: self.parent.src
+        pos: self.parent.pos
+        size: self.parent.size
+        allow_stretch: True
+        keep_ratio: False
+
+
+<NumButton>:
+    background_color: (0, 0, 0, 0)
+    on_press: app.changeNumber(self)
+    Image:
+        source: self.parent.src
+        pos: self.parent.pos
+        size: self.parent.size
+        allow_stretch: True
+        keep_ratio: False
+    Label:
+        text: self.parent.text
+        bold: False
+        font_size: self.parent.height
+        pos: self.parent.pos
+        #x: self.parent.x - self.width / 5
+        #y: self.parent.y
+        size: self.parent.size
+        color: (0, 0, 0, 1)
