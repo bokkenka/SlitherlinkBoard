@@ -66,12 +66,12 @@ MyBoxLayout:
     height: app.size #self.parent.height / 40
     background_color: (0, 0, 0, 0)
     on_press: root.changeColor(self)
-    Image:
-        source: self.parent.src
-        pos: self.parent.pos
-        size: self.parent.size
-        allow_stretch: True
-        keep_ratio: False
+    canvas:
+        Color:
+            rgba: self.clr
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 
 <VLineButton@Button>:
@@ -79,23 +79,23 @@ MyBoxLayout:
     width: app.size #self.parent.height / 40
     background_color: (0, 0, 0, 0)
     on_press: root.changeColor(self)
-    Image:
-        source: self.parent.src
-        pos: self.parent.pos
-        size: self.parent.size
-        allow_stretch: True
-        keep_ratio: False
+    canvas:
+        Color:
+            rgba: self.clr
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 
 <NumButton>:
     background_color: (0, 0, 0, 0)
     on_press: app.changeNumber(self)
-    Image:
-        source: self.parent.src
-        pos: self.parent.pos
-        size: self.parent.size
-        allow_stretch: True
-        keep_ratio: False
+    canvas:
+        Color:
+            rgba: self.clr
+        Rectangle:
+            pos: self.pos
+            size: self.size
     Label:
         text: self.parent.text
         bold: False

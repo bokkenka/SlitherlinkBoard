@@ -1,8 +1,16 @@
 from kivy.app import App
-from kivy.properties import StringProperty, BooleanProperty
+from kivy.properties import StringProperty, BooleanProperty, ListProperty
 from kivy.uix.button import Button
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
+
+# Define default colors...
+WHITE = [1,1,1,1]
+BLACK = [0,0,0,1]
+RED = [1,.5,.5,1]
+YELLOW = [1,1,.4,1]
+GREY = [.9,.9,.9,1]
+ERROR = [0,1,0,1]
 
 
 class MyBoxLayout(BoxLayout):
@@ -14,14 +22,13 @@ class DotButton(Button):
 
 
 class NumButton(Button):
-    src = StringProperty('resources/white.png')
+    clr = ListProperty(ERROR)
 
     def resetNumber(self):
         self.text = ' '
     
     def resetColor(self):
-        self.src = 'resources/white.png'
-
+        self.clr = WHITE
 
 
 class MyGrid(GridLayout):
@@ -34,6 +41,7 @@ class MyGrid(GridLayout):
             self.dotRow()
             self.numRow()
         self.dotRow()
+        self.resetAll(self)
 
     def dotRow(self):
         for col in range(self.gamecols):
@@ -67,18 +75,18 @@ class MyGrid(GridLayout):
 
 
 class Line(Button):
-    src = StringProperty('resources/grey.png')
+    clr = ListProperty(ERROR)
 
     def changeColor(self, line):
-        if line.src == 'resources/grey.png':
-            line.src = 'resources/black.png'
-        elif line.src == 'resources/black.png':
-            line.src = 'resources/red.png'
+        if line.clr == GREY:
+            line.clr = BLACK
+        elif line.clr == BLACK:
+            line.clr = RED
         else:
-            line.src = 'resources/grey.png'
+            line.clr = GREY
 
     def resetLine(self):
-        self.src = 'resources/grey.png'
+        self.clr = GREY
 
 
 class HLineButton(Line):
@@ -90,7 +98,7 @@ class VLineButton(Line):
 
 
 class SlitherlinkBoardApp(App):
-    __version__ = '005'
+    __version__ = '1.0'
     __author__ = 'NemoM'
     version = StringProperty(__version__)
 
@@ -101,10 +109,10 @@ class SlitherlinkBoardApp(App):
 
     def changeNumber(self, btn):
         if self.numlock:
-            if btn.src == 'resources/yellow.png':
-                btn.src = 'resources/white.png'
+            if btn.clr == YELLOW:
+                btn.clr = WHITE
             else:
-                btn.src = 'resources/yellow.png'
+                btn.clr = YELLOW
         else:
             if btn.text == '3':
                 btn.text = '0'
@@ -116,7 +124,6 @@ class SlitherlinkBoardApp(App):
                 btn.text = ' '
             else:
                 btn.text = '1'
-
 
 
 if __name__ == '__main__':
