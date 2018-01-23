@@ -1,6 +1,6 @@
 # SlitherlinkBoard
 
-This is a simple Python / Kivy program to play Slitherlink.  All it is is the board.  It does not create puzzles.  It does not solve puzzles.  It does not check solutions.
+This is a simple Python / Kivy program to play Slitherlink.  It is only the board.  It does not create puzzles.  It does not solve puzzles.  It does not check solutions.
 
 You will need to supply a valid puzzle.  I suggest [Krazy Dad](https://krazydad.com/slitherlink/).
 
